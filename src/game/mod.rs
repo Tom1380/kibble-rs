@@ -15,12 +15,18 @@ pub enum Direction {
     Down,
 }
 
-fn read_key(g: &getch::Getch) -> Option<Direction> {
+pub enum Key {
+    Arrow(Direction),
+    Space,
+}
+
+fn read_key(g: &getch::Getch) -> Option<Key> {
     match g.getch() {
-        Ok(87) | Ok(119) => Some(Direction::Up),
-        Ok(68) | Ok(100) => Some(Direction::Right),
-        Ok(83) | Ok(115) => Some(Direction::Down),
-        Ok(65) | Ok(97) => Some(Direction::Left),
+        Ok(87) | Ok(119) => Some(Key::Arrow(Direction::Up)),
+        Ok(68) | Ok(100) => Some(Key::Arrow(Direction::Right)),
+        Ok(83) | Ok(115) => Some(Key::Arrow(Direction::Down)),
+        Ok(65) | Ok(97) => Some(Key::Arrow(Direction::Left)),
+        Ok(32) => Some(Key::Space),
         _ => None,
     }
 }
@@ -30,9 +36,14 @@ pub fn play() {
     let g = getch::Getch::new();
     m.print();
     while maze::Value::End != m.read_cur().value {
-        if let Some(d) = read_key(&g) {
-            if m.move_in_direction(d) {
-                m.print()
+        if let Some(k) = read_key(&g) {
+            match k {
+                Key::Arrow(d) => {
+                    if m.move_in_direction(d) {
+                        m.print()
+                    }
+                }
+                Key::Space => return,
             }
         }
     }
