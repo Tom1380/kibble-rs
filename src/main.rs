@@ -8,7 +8,10 @@ fn main() {
         // print_snake_ascii_art();
         let selections = &["Gioca", "Esci"];
         let selection = Select::with_theme(&ColorfulTheme::default())
-            .with_prompt("HEYMAN")
+            .with_prompt(
+                "Dai creatori di snake, nelle vostre case,
+rispettando le distanze di sicurezza, vi presentiamo KIBBLE",
+            )
             .default(0)
             .items(&selections[..])
             .interact_opt()
