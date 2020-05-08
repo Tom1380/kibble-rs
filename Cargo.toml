@@ -1,0 +1,15 @@
+[package]
+name = "kibblers"
+version = "0.1.0"
+authors = ["Tommaso Thea Cioni <zacktommy1118@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+"dialoguer" = "*"
+"serde_json" = "*"
+"serde" = "*"
+"colored" = "*"
+"reqwest" = "0.9.24"
+"termcolor" = "*"
+getch = "*"
